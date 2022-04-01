@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <div id="headerWrapper">
@@ -239,4 +238,4 @@ export default {
   },
 }
 </script>
-<style scoped src = '@/static/css/privacy.css' />
+<style scoped src="@/static/css/privacy.css" />

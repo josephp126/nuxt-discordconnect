@@ -2,8 +2,17 @@
   <div class="bg-discortics-dashboard rounded-md">
     <div class="py-2">
       <div class="p-4 flex flex-col items-start space-y-1">
-        <span class="text-2xl bg-navCurrent text-transparent bg-clip-text font-bold font-montserrat">Your Servers</span>
-        <span class = "text-sm">Manage your servers here!</span>
+        <span
+          class="
+            text-2xl
+            bg-navCurrent
+            text-transparent
+            bg-clip-text
+            font-bold font-montserrat
+          "
+          >Your Servers</span
+        >
+        <span class="text-sm">Manage your servers here!</span>
       </div>
     </div>
 
@@ -11,7 +20,9 @@
       <div
         class="spinner-grow text-secondary align-self-center loader-lg"
       ></div>
-      <div class="flex flex-col md:flex-row flex-wrap items-center md:items-start">
+      <div
+        class="flex flex-col md:flex-row flex-wrap items-center md:items-start"
+      >
         <CardsServers
           v-for="stuff in servers"
           :key="stuff.name"
@@ -43,7 +54,7 @@ if (context.$auth.loggedIn) {
         context.$auth.$storage.setState('connected', result)
       }
     } else if (context.$auth.$storage.getState('connected')) {
-        console.log("yee")
+      console.log("yee")
       await context.$auth.$storage.setState('connected', false)
     }
     
@@ -51,8 +62,7 @@ if (context.$auth.loggedIn) {
   },
   */
   async asyncData({ $api, $_ }) {
-
-const token = localStorage.getItem('sessionToken')
+    const token = localStorage.getItem('sessionToken')
     const allServers = await $api.$request({
       url: 'v2/@me/guilds',
       method: 'get',
@@ -68,13 +78,15 @@ const token = localStorage.getItem('sessionToken')
     })
 
     return {
-      servers: guilds.map((x) => ({
-        name: x.name,
-        icon: x.icon,
-        id: x.id,
-        exists: x.exists,
-        userType: $_.capitalize(x.userType)
-      })).sort((a, b) => a.exists === b.exists ? 0 : a.exists ? -1 : 1),
+      servers: guilds
+        .map((x) => ({
+          name: x.name,
+          icon: x.icon,
+          id: x.id,
+          exists: x.exists,
+          userType: $_.capitalize(x.userType),
+        }))
+        .sort((a, b) => (a.exists === b.exists ? 0 : a.exists ? -1 : 1)),
       serverList: guilds,
     }
   },
